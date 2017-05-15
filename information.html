@@ -155,22 +155,15 @@
                             <div class="form-group">
                                 <label>Nature*</label>
                                 <br>
-                                <input type="checkbox" name="nature" id="AGRICULTURE" value="AGRICULTURE"> Agriculture
+                                <input type="hidden" name="agriculture" value="0">
+                                <input type="checkbox" name="agriculture" id="agriculture" value="1"> Agriculture
                                 <br>
-                                <input type="checkbox" name="nature" id="AQUACULTURE" value="AQUACULTURE"> Aquaculture
+                                <input type="hidden" name="aquaculture" value="0">
+                                <input type="checkbox" name="aquaculture" id="aquaculture" value="1"> Aquaculture
                                 <br>
-                                <input type="checkbox" name="nature" id="" value=""> 
+                                <input type="hidden" name="fishery" value="0">
+                                <input type="checkbox" name="fishery" id="fishery" value="1"> Fishery
                                 <br>
-                                <!-- <div class="radio" id="nature">
-                                    <label for="agriculture_radio">
-                                        <input type="radio" name="nature" id="AGRICULTURE" value="AGRICULTURE" required="required">Agriculture
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label for="aquaculture_radio">
-                                        <input type="radio" name="nature" id="AQUACULTURE" value="AQUACULTURE">Aquaculture
-                                    </label>
-                                </div> -->
                             </div>
 
                             <div class="form-group">
@@ -307,18 +300,38 @@
 
       function populateMerchantInformation() {
         $('#name').val(merchantInformationPartial.name);
+
         var cat = merchantInformationPartial.category;
         if (cat != null) {
           document.getElementById(cat).checked = true;
         } else {
           // do nothing
         };
-        var nat = merchantInformationPartial.nature;
-        if (nat != null) {
-            document.getElementById(nat).checked = true;
+
+        if (merchantInformationPartial.agriculture == '1') {
+          $('#agriculture').prop("checked", true);
+        } else if (merchantInformationPartial.agriculture == '0') {
+          $('#agriculture').prop("checked", false);
         } else {
           // do nothing
         };
+
+        if (merchantInformationPartial.aquaculture == '1') {
+          $('#aquaculture').prop("checked", true);
+        } else if (merchantInformationPartial.aquaculture == '0') {
+          $('#aquaculture').prop("checked", false);
+        } else {
+          // do nothing
+        };
+
+        if (merchantInformationPartial.fishery == '1') {
+          $('#fishery').prop("checked", true);
+        } else if (merchantInformationPartial.fishery == '0') {
+          $('#fishery').prop("checked", false);
+        } else {
+          // do nothing
+        };
+
         $('#address').val(merchantInformationPartial.address);
         $('#country').val(merchantInformationPartial.country);
         $('#zip').val(merchantInformationPartial.zip);

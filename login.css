@@ -1,0 +1,116 @@
+body{
+    margin:0 auto;
+    padding: 0;
+    background: #7AD8D3;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+}
+
+h1,h2,h3,h4,h5,h6{
+font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+    color: #ecf0f1;
+}
+
+#login_content i{
+  color: #404040;
+}
+
+.circle {
+	width: 100px;
+	height: 100px;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+#login_header {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#login_content{
+  margin-top: 30px;
+  padding: 0 30px 30px;
+  height: 100%;
+  background-color: #ffffff;
+  font-weight: 400;
+  border-radius: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#login_content h1{
+  color: #404040;
+  text-align: center;
+  font-weight: bold ;
+
+}
+
+#login_content h3 {
+    color: #404040;
+    text-align: center;
+    font-weight: ;
+}
+#login_content .form-control {
+  -webkit-box-shadow: inset 0 1px 1px transparent;
+          box-shadow: inset 0 1px 1px transparent;
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+#login_content .form-control:focus {
+  border-color: inherit;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px transparent, 0 0 8px transparent;
+          box-shadow: inset 0 1px 1px transparent, 0 0 8px transparent;
+}
+.custom-input{
+  background-color: transparent;
+  border: 0px;
+  border-bottom: 1px solid #404040;
+  border-radius: 0px;
+}
+#login_content .input-group-addon {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: transparent;
+  border: 0px;
+  border-bottom: 1px solid black;
+  border-radius: 0px;
+  border-color: inherit;
+}
+
+.btn-custom{
+  width: 100%;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  border-radius: 0px;
+}
+
+.btn-custom:hover{
+  color: #ffffff;
+}
+
+.modal-title{
+  color: #474747;
+}
+
+#signup_link{
+  margin-top: 10px;
+}
+
+#logo{
+  text-align: center;
+}
+#logo img{
+  width: 250px;
+  padding-top: 20px;
+}

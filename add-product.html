@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="assets/sproutfore_icon.ico">
+
+
+    <title>Sproutfore - Add New Product</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link href="css/sproutfore.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <script src="https://use.fontawesome.com/e2895505a7.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+      <!-- Navigation -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Sproutfore Merchant Dashboard</a>
+          </div>
+          <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <ul class="nav navbar-nav side-nav">
+                  <li class="">
+                      <a href="information.html"><i class="fa fa-fw fa-address-card-o"></i> Information</a>
+                  </li>
+                  <li class="active">
+                      <a href="inventory.html"><i class="fa fa-fw fa-shopping-basket"></i> Inventory</a>
+                  </li>
+                  <li class="">
+                      <a href=""><i class="fa fa-fw fa-list-ul"></i> Transactions</a>
+                  </li>
+                  <li class="">
+                      <a href=""><i class="fa fa-fw fa-commenting-o"></i> Ratings &amp Comments</a>
+                  </li>
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </nav>
+
+        <!-- Re-login Modal -->
+        <div class="modal fade" id="relogin-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Session Timeout! <br> Please login again.</h4>
+              </div>
+              <div class="modal-body">
+                <form id="relogin-modal-form" action="/merchant/login" method="post">
+                  <div class="form-group">
+                    <label for="" class="control-label">Email</label>
+                    <input name="email" type="text" class="form-control" id="">
+                  </div>
+                  <div class="form-group">
+                    <label for="" class="control-label">Password</label>
+                    <input name="password" type="password" class="form-control" id="">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <label id="modal-feedback" class="pull-left" style="color:red;"></label>
+                <button type="submit" class="btn btn-primary" id="relogin-btn">Log In</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feedback Modal -->
+        <div class="modal fade" id="feedback-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel"></h4>
+              </div>
+              <div class="modal-body">
+                <p class="modal-body-content"></p>
+              </div>
+              <div class="modal-footer">
+                <label id="modal-feedback" class="pull-left" style="color:red;"></label>
+                <button type="button" class="btn btn-primary feedback-close-btn" data-dismiss="modal">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Add New Product
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-shopping-basket"></i> <a href="inventory.html">Inventory</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-edit"></i> Add New Product
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <form role="form" id="add-product-form" action="/merchant/addproduct" method="post" class="ajax">
+
+                            <div class="form-group">
+                                <input type="hidden" name="token" id="token" class="form-control" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Name*</label>
+                                <input type="text" name="name" id="name" class="form-control" value="" maxlength="40" required="required">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Category*</label>
+                                <select name="category" id="category" class="form-control" required>
+                                  <option value="" disabled selected>Select a category</option>
+                                  <option value="VEGETABLE">Fruits &amp Vegetables</option>
+                                  <option value="NOODLE_RICE">Rice &amp Noodles</option>
+                                  <option value="MEAT">Meat</option>
+                                  <option value="SEAFOOD">Seafood</option>
+                                  <option value="DAIRY_EGG">Dairy &amp Eggs</option>
+                                  <option value="BEVERAGE">Beverages</option>
+                                  <option value="NUT_SNACK">Snacks &amp Nuts</option>
+                                  <option value="SPREAD">Spreads</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Image</label>
+                                <input type="file" name="" accept="image/jpeg, image/png" onchange="loadFile(event)">
+                                <!-- <img id="product-image" src="#" alt="product image"> -->
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Description</label>
+                                <textarea name="description" id="description" class="form-control" rows="5"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Unit Description</label>
+                                <input name="unit" id="unit" class="form-control"></input>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input name="price" id="price" class="form-control" type="number" step=".01" placeholder="0.00">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Availability</label>
+                                <div class="radio" id="available">
+                                    <label>
+                                        <input type="radio" name="available" id="1" value="1" checked="checked">In stock
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="available" id="0" value="0">Out of stock
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="add-product-btn" class="btn btn-default btn-success" value="save">Save</button>
+
+                        </form>
+
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="main.js"></script>
+
+    <!-- Page Specific JavaScript -->
+    <script>
+    $( document ).ready(function()
+    {
+      // populate the form with token
+      $('#token').val(sessionStorage.token);
+
+      // console.log('product id is : ' + sessionStorage.productID);
+
+    });
+
+    </script>
+
+</body>
+
+</html>

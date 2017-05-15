@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="assets/sproutfore_icon.ico">
+
+    <title>Sproutfore - Merchant Information</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link href="css/sproutfore.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <script src="https://use.fontawesome.com/e2895505a7.js"></script>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Sproutfore Merchant Dashboard</a>
+            </div>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="active">
+                        <a href="information.html"><i class="fa fa-fw fa-address-card-o"></i> Information</a>
+                    </li>
+                    <li class="">
+                        <a href="inventory.html"><i class="fa fa-fw fa-shopping-basket"></i> Inventory</a>
+                    </li>
+                    <li class="">
+                        <a href=""><i class="fa fa-fw fa-list-ul"></i> Transactions</a>
+                    </li>
+                    <li class="">
+                        <a href=""><i class="fa fa-fw fa-commenting-o"></i> Ratings &amp Comments</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <!-- Re-login Modal -->
+        <div class="modal fade" id="relogin-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Session Timeout! <br> Please login again.</h4>
+              </div>
+              <div class="modal-body">
+                <form id="relogin-modal-form" action="/merchant/login" method="post">
+                  <div class="form-group">
+                    <label for="" class="control-label">Email</label>
+                    <input name="email" type="text" class="form-control" id="">
+                  </div>
+                  <div class="form-group">
+                    <label for="" class="control-label">Password</label>
+                    <input name="password" type="password" class="form-control" id="">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <label id="modal-feedback" class="pull-left" style="color:red;"></label>
+                <button type="submit" class="btn btn-primary" id="relogin-btn">Log In</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feedback Modal -->
+        <div class="modal fade" id="feedback-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel"></h4>
+              </div>
+              <div class="modal-body">
+                <p class="modal-body-content"></p>
+              </div>
+              <div class="modal-footer">
+                <label id="modal-feedback" class="pull-left" style="color:red;"></label>
+                <button type="button" class="btn btn-primary feedback-close-btn" data-dismiss="modal">Ok</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+              <!-- Page Heading -->
+              <div class="row">
+                  <div class="col-lg-10">
+                      <h1 class="page-header">
+                          Merchant Information
+                      </h1>
+                      <ol class="breadcrumb">
+                          <li class="active">
+                              <i class="fa fa-address-card-o"></i> <a href="information.html"> Merchant Information</a>
+                          </li>
+                      </ol>
+                  </div>
+              </div>
+              <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <form id="update-merchant-form" action="/merchant/updateprofile" method="post" class="ajax">
+
+                            <div class="form-group">
+                                <input type="hidden" name="token" id="token" class="form-control" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Merchant Name*</label>
+                                <input type="text" name="name" id="name" class="form-control" value="" required="required" maxlength="30">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Category*</label>
+                                <div class="radio" id="category">
+                                    <label>
+                                        <input type="radio" name="category" id="FARMER" value="FARMER" required="required">Farmer
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="category" id="RETAILER" value="RETAILER">Retailer
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nature*</label>
+                                <br>
+                                <input type="checkbox" name="nature" id="AGRICULTURE" value="AGRICULTURE"> Agriculture
+                                <br>
+                                <input type="checkbox" name="nature" id="AQUACULTURE" value="AQUACULTURE"> Aquaculture
+                                <br>
+                                <input type="checkbox" name="nature" id="" value=""> 
+                                <br>
+                                <!-- <div class="radio" id="nature">
+                                    <label for="agriculture_radio">
+                                        <input type="radio" name="nature" id="AGRICULTURE" value="AGRICULTURE" required="required">Agriculture
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="aquaculture_radio">
+                                        <input type="radio" name="nature" id="AQUACULTURE" value="AQUACULTURE">Aquaculture
+                                    </label>
+                                </div> -->
+                            </div>
+
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input class="form-control" maxlength="80" name="address" id="address">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Country</label>
+                                <input class="form-control" maxlength="48" name="country" id="country">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Zip Code</label>
+                                <input class="form-control" maxlength="10" name="zip" id="zip">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Contact Number</label>
+                                <input class="form-control" maxlength="32" name="number" id="number">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Description of your business</label>
+                                <textarea class="form-control" rows="5" name="description" id="description"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Shipping Fee</label>
+                                <input class="form-control" type="number" step=".01" name="shipping_fee" id="shipping_fee" value="0.00">
+                            </div>
+
+                            <button type="submit" id="update-merchant-btn" class="btn btn-default btn-success" value="save">Save</button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Account Information
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                      <div class="form-group">
+                          <label>Email Address</label>
+                          <p id="email"></p>
+                      </div>
+
+                      <div class="form-group">
+                          <label>Password</label>
+                          <p><a href="changepassword.html">Change Password</a></p>
+                      </div>
+
+                    </div>
+
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery -->
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="main.js"></script>
+
+    <!-- Page Specific JavaScript -->
+    <script>
+
+    $( document ).ready(function(){
+      // Add token to form
+      $('#token').val(sessionStorage.token);
+
+      var token = sessionStorage.token;
+
+      $.post("/merchant/getprofile", {token : token}, function(response) {
+
+        if (response == '"error"') {
+          $('#relogin-modal').modal('show');
+
+        } else if (response == 'false') {
+          sessionStorage.response = response;
+          sessionStorage.feedbackTitle = 'Oops!';
+          sessionStorage.feedbackMessage = 'An unknown error has occurred. Please try again <hr> or <a href="login.html">Log In</a> again. <hr>Otherwise, please <a href="mailto:enquiries@sproutfore.com" target="_top">Contact Sproutfore Support</a> for assistance.';
+          $('#feedback-modal').modal('show');
+
+        } else if (response) {
+          merchantInformationPartial = JSON.parse(response);
+          populateAccountInformation();
+          populateMerchantInformation();
+
+        } else {
+          return false;
+        }
+
+      }).fail(function(response) {
+        sessionStorage.response = response;
+        sessionStorage.feedbackTitle = 'Oops!';
+        sessionStorage.feedbackMessage = 'We connected to the server, but it returned an error.';
+        $('#feedback-modal').modal('show');
+      });
+
+      function populateAccountInformation() {
+        $('#email').html(sessionStorage.email);
+      };
+
+      function populateMerchantInformation() {
+        $('#name').val(merchantInformationPartial.name);
+        var cat = merchantInformationPartial.category;
+        if (cat != null) {
+          document.getElementById(cat).checked = true;
+        } else {
+          // do nothing
+        };
+        var nat = merchantInformationPartial.nature;
+        if (nat != null) {
+            document.getElementById(nat).checked = true;
+        } else {
+          // do nothing
+        };
+        $('#address').val(merchantInformationPartial.address);
+        $('#country').val(merchantInformationPartial.country);
+        $('#zip').val(merchantInformationPartial.zip);
+        $('#number').val(merchantInformationPartial.number);
+        $('#description').val(merchantInformationPartial.description);
+        $('#shipping_fee').val(merchantInformationPartial.shipping_fee);
+      };
+
+    });
+    </script>
+
+
+</body>
+
+</html>
